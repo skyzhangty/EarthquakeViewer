@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference 
+        android:key="PREF_AUTO_REFRESH"
+        android:defaultValue="false"
+        android:title="Auto Refresh"
+        android:summary="Select to turn on automatic updating"
+        />
+    <ListPreference 
+        android:key="PREF_REFRESH_FREQ"
+        android:title="Refresh Frequency"
+        android:summary="Frequency at which to refresh earthquake list"
+        android:entries="@array/update_freq_options"
+        android:entryValues="@array/update_freq"
+        android:dialogTitle="Refresh Frequency"
+        android:defaultValue="60"
+        />
+	<ListPreference 
+	    android:key="PREF_MIN_MAG"
+	    android:title="Minimum magnitude"
+	    android:summary="Select the minimum magnitude earthquake to view"
+	    android:entries="@array/min_mag_options"
+	    android:entryValues="@array/min_mag"
+	    android:dialogTitle="Magnitude"
+	    android:defaultValue="3"
+	    />
+	<ListPreference 
+	    android:key="PREF_SORT_BY"
+	    android:title="Sort list by"
+	    android:entries="@array/sort_by_options"
+	    android:entryValues="@array/sort_by"
+	    android:dialogTitle="Sort list by"
+	    android:defaultValue="Date"
+	/>
+	<ListPreference 
+	    android:key="PREF_VIEW_PAST"
+	    android:title="View past"
+	    android:entries="@array/view_past_options"
+	    android:entryValues="@array/view_past"
+	    android:dialogTitle="View past"
+	    android:defaultValue="7 Days"
+	/>
+</PreferenceScreen>
