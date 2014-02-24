@@ -3,10 +3,10 @@ package com.raymond.raymondearthquakesviewer;
 import java.util.HashMap;
 
 import android.app.SearchManager;
+import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SearchRecentSuggestionsProvider;
 import android.content.SharedPreferences;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -21,7 +21,7 @@ import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class EarthquakesContentProvider extends SearchRecentSuggestionsProvider {
+public class EarthquakesContentProvider extends ContentProvider {
 	//Publish the content provider's URI
 	public static final Uri CONTENT_URI = Uri.parse("content://com.raymond.EarthquakesContentProvider/earthquakes"); 
 	//Columns in the database

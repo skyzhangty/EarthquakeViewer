@@ -1,5 +1,6 @@
 package com.raymond.raymondearthquakesviewer;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,6 +41,12 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		CheckBoxPreference auto_refresh = (CheckBoxPreference)findPreference(EarthquakesViewerActivity.AUTO_REFRESH_KEY);
 		ListPreference refresh_freq = (ListPreference)findPreference(EarthquakesViewerActivity.REFRESH_FREQ_KEY);
 		refresh_freq.setEnabled(auto_refresh.isChecked());
+		
+		//Let the fragment have the action bar and set the icon home
+		setHasOptionsMenu(true);
+		getActivity().getActionBar().setHomeButtonEnabled(true);
+		getActivity().getActionBar().setDisplayUseLogoEnabled(false); 
+		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	@Override
 	public void onResume() {
@@ -65,5 +73,20 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			ListPreference refresh_freq = (ListPreference)findPreference(EarthquakesViewerActivity.REFRESH_FREQ_KEY);
 			refresh_freq.setEnabled(auto_refresh.isChecked());
 		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()) {
+		case (android.R.id.home):
+			/*Intent intent = new Intent(getActivity(), EarthquakesViewerActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);*/
+			getActivity().finish();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		
 	}
 }

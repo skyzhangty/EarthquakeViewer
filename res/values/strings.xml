@@ -36,34 +36,38 @@
         <item>7</item>
         <item>8</item>
     </string-array>
-	<string-array name="sort_by_options">
-	    <item>Date</item>
-	    <item>Magnitude</item>
-	</string-array>
-	<string-array name="sort_by">
-	    <item>Date</item>
-	    <item>Magnitude</item>
-	</string-array>
-	<string-array name="view_past_options">
-	    <item>Hour</item>
-	    <item>Day</item>
-	    <item>7 Days</item>
-	    <item>30 Days</item>
-	</string-array>
-	<string-array name="view_past">
-	    <item>Hour</item>
-	    <item>Day</item>
-	    <item>7 Days</item>
-	    <item>30 Days</item>
-	</string-array>
+    <string-array name="sort_by_options">
+        <item>Date</item>
+        <item>Magnitude</item>
+    </string-array>
+    <string-array name="sort_by">
+        <item>Date</item>
+        <item>Magnitude</item>
+    </string-array>
+    <string-array name="view_past_options">
+        <item>Hour</item>
+        <item>Day</item>
+        <item>7 Days</item>
+        <item>30 Days</item>
+    </string-array>
+    <string-array name="view_past">
+        <item>Hour</item>
+        <item>Day</item>
+        <item>7 Days</item>
+        <item>30 Days</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_settings">Settings</string>
     <string name="search_earthquake_location">Search earthquake location</string>
     <string name="title_activity_earthquake_searchable">EarthquakeSearchableActivity</string>
     <string name="results">Results</string>
     <string name="this_is_an_arrow">This is an arrow</string>
-	<string name="pull_to_refresh">Pull down to refresh</string>
-	<string name="release_to_refresh">Release to refresh</string>
-	<string name="updating">Updating</string>
-	
+    <string name="pull_to_refresh">Pull down to refresh</string>
+    <string name="release_to_refresh">Release to refresh</string>
+    <string name="updating">Updating</string>
+    <string name="title_activity_earthquakes_result">Search Results</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="no_earthquake_found">No earthquake found!</string>
+
 </resources>

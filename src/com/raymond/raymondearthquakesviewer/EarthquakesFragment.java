@@ -16,7 +16,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -93,12 +92,12 @@ public class EarthquakesFragment extends ListFragment implements LoaderCallbacks
 		}
 		getLoaderManager().initLoader(0, null, this);
 		setHasOptionsMenu(true);
-		
+		setRetainInstance(true);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		super.onCreateView(inflater, container, savedInstanceState);
 		View v= inflater.inflate(R.layout.earthquakes_fragment, container, false);
 		mProgressBar = (ProgressBar)(v.findViewById(R.id.progressbar));
 		mRefreshableList = (EarthquakeRefreshableList)(v.findViewById(R.id.refreshable_list));
@@ -183,6 +182,7 @@ public class EarthquakesFragment extends ListFragment implements LoaderCallbacks
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
 		inflater.inflate(R.menu.earthquake_viewer_actionbar, menu);
 		SearchManager searchManager = (SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
 		SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
@@ -238,7 +238,7 @@ public class EarthquakesFragment extends ListFragment implements LoaderCallbacks
 			sortOrder = EarthquakesContentProvider.COL_MAG+" DESC";
 		}
 		CursorLoader loader = new CursorLoader(getActivity(), EarthquakesContentProvider.CONTENT_URI, null, where, null, sortOrder);
-
+		
 		return loader;
 	}
 

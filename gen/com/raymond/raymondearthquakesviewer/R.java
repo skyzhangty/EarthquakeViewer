@@ -223,23 +223,24 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f020021;
     }
     public static final class id {
-        public static final int action_refresh=0x7f060011;
-        public static final int action_search=0x7f06000f;
-        public static final int action_settings=0x7f060010;
-        public static final int arrow_image=0x7f06000c;
-        public static final int description_text=0x7f06000e;
+        public static final int action_refresh=0x7f060012;
+        public static final int action_search=0x7f060010;
+        public static final int action_settings=0x7f060011;
+        public static final int arrow_image=0x7f06000d;
+        public static final int description_text=0x7f06000f;
         public static final int earthquakes_container=0x7f060005;
         public static final int hybrid=0x7f060004;
-        public static final int listview_header=0x7f06000b;
-        public static final int map=0x7f060006;
+        public static final int list_fragment=0x7f060006;
+        public static final int listview_header=0x7f06000c;
+        public static final int maps_fragment=0x7f060007;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int progressbar=0x7f060009;
-        public static final int pulltorefresh_progressbar=0x7f06000d;
-        public static final int refreshable_list=0x7f060008;
-        public static final int result=0x7f06000a;
+        public static final int progressbar=0x7f06000b;
+        public static final int pulltorefresh_progressbar=0x7f06000e;
+        public static final int refreshable_list=0x7f06000a;
+        public static final int result_container=0x7f060008;
         public static final int satellite=0x7f060002;
-        public static final int settings=0x7f060007;
+        public static final int settings=0x7f060009;
         public static final int terrain=0x7f060003;
     }
     public static final class integer {
@@ -247,7 +248,7 @@ containing a value of this type.
     }
     public static final class layout {
         public static final int activity_earthquake_viewer=0x7f030000;
-        public static final int activity_maps=0x7f030001;
+        public static final int activity_earthquakes_result=0x7f030001;
         public static final int activity_settings=0x7f030002;
         public static final int earthquakes_fragment=0x7f030003;
         public static final int fragment_earthquakes_result=0x7f030004;
@@ -255,8 +256,9 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int earthquake_viewer_actionbar=0x7f0c0000;
-        public static final int maps=0x7f0c0001;
-        public static final int settings=0x7f0c0002;
+        public static final int earthquakes_result=0x7f0c0001;
+        public static final int maps=0x7f0c0002;
+        public static final int settings=0x7f0c0003;
     }
     public static final class string {
         public static final int action_settings=0x7f07001b;
@@ -356,6 +358,8 @@ containing a value of this type.
          */
         public static final int common_signin_button_text_long=0x7f070013;
         public static final int hello_blank_fragment=0x7f070020;
+        public static final int hello_world=0x7f07002a;
+        public static final int no_earthquake_found=0x7f07002b;
         public static final int pull_to_refresh=0x7f070026;
         public static final int refresh=0x7f07001e;
         public static final int release_to_refresh=0x7f070027;
@@ -365,6 +369,7 @@ containing a value of this type.
         public static final int settings=0x7f07001f;
         public static final int this_is_an_arrow=0x7f070025;
         public static final int title_activity_earthquake_searchable=0x7f070023;
+        public static final int title_activity_earthquakes_result=0x7f070029;
         public static final int title_activity_maps=0x7f07001c;
         public static final int title_activity_settings=0x7f070021;
         public static final int updating=0x7f070028;

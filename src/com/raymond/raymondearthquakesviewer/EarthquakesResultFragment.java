@@ -1,6 +1,7 @@
 package com.raymond.raymondearthquakesviewer;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.app.SearchManager;
@@ -21,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -35,9 +35,9 @@ import android.widget.TextView;
 public class EarthquakesResultFragment extends ListFragment implements LoaderCallbacks<Cursor>{
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	public static final String QUERY = "com.raymond.raymondearthquakesviewer.query";
-	
-	private String mQuery;
+	private static final String QUERY = "com.raymond.raymondearthquakesviewer.query";
+	private static final String ID = "com.raymond.raymondearthquakesviewer.id";
+	private String mQuery="", mID="";
 	private EarthquakesCusorAdapter mAdapter;
 	private OnResultFragmentInteractionListener mListener;
 	/**
@@ -51,10 +51,11 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 	 * @return A new instance of fragment EarthquakesResultFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static EarthquakesResultFragment newInstance(String query) {
+	public static EarthquakesResultFragment newInstance(String id, String query) {
 		
 		EarthquakesResultFragment fragment = new EarthquakesResultFragment();
 		Bundle args = new Bundle();
+		args.putString(ID, id);
 		args.putString(QUERY, query);
 		fragment.setArguments(args);
 	
@@ -69,9 +70,14 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
+			mID = getArguments().getString(ID);
 			mQuery = getArguments().getString(QUERY);
 		}
 		setHasOptionsMenu(true);
+		getActivity().getActionBar().setHomeButtonEnabled(true);
+		getActivity().getActionBar().setDisplayUseLogoEnabled(false); 
+		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		setRetainInstance(true);
 	}
 
 	@Override
@@ -79,7 +85,6 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View view = inflater.inflate(R.layout.fragment_earthquakes_result,container, false);
-		
 		return view;
 	}
 	@Override
@@ -90,50 +95,16 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 		String []from = {EarthquakesContentProvider.COL_PLACE,EarthquakesContentProvider.COL_MAG};
 		int []to = {android.R.id.text1,android.R.id.text2};
 		mAdapter = new EarthquakesCusorAdapter(getActivity(), android.R.layout.simple_list_item_2, null, from, to,0);
-		startSearch(mQuery);
 		setListAdapter(mAdapter);
+		
 	}
 	
-	public void startSearch(String query) {
-		mQuery=query;
-		
-		getLoaderManager().restartLoader(0, null, this);
-		SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		int miniMag = Integer.parseInt(sPref.getString(EarthquakesViewerActivity.MINMAG_KEY, "3"));
-		String view_past_where = EarthquakesViewerActivity.getDateSettings(sPref);
-		
-		String where=EarthquakesContentProvider.COL_PLACE+" LIKE '%"+mQuery.trim()+"%' AND " 
-					+ EarthquakesContentProvider.COL_MAG+">="+miniMag
-					+ " AND "+view_past_where;
-		String sort_by = sPref.getString(EarthquakesViewerActivity.SORT_BY_KEY, "Date");
-		String sortOrder = null;
-		if(sort_by.equals("Magnitude")) {
-			sortOrder = EarthquakesContentProvider.COL_MAG+" DESC";
-		}
-		Cursor cursor = getActivity().getContentResolver().query(EarthquakesContentProvider.CONTENT_URI, 
-				null, where, null, sortOrder);
-		int result_count = cursor.getCount();
-		if(result_count==0) {
-			TextView resultText = (TextView)getView().findViewById(R.id.result);
-			resultText.setText("No Result Found!");
-		}
-		else {
-			TextView resultText = (TextView)getView().findViewById(R.id.result);
-			if(result_count==1) {
-				resultText.setText("Result: "+result_count);
-			}
-			else if(result_count>1){
-				resultText.setText("Results: "+result_count);
-			}
-			
-		}
-		
-	}
+	
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
-		startSearch(mQuery);
+		getLoaderManager().restartLoader(0, null, this);
+		getActivity().getActionBar().getTabAt(0).select();
 	}
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
@@ -172,7 +143,7 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 		
 		mListener = null;
 	}
-
+	
 	/**
 	 * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated to
@@ -192,10 +163,9 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 		SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int miniMag = Integer.parseInt(sPref.getString(EarthquakesViewerActivity.MINMAG_KEY, "3"));
 		String view_past_where = EarthquakesViewerActivity.getDateSettings(sPref);
-		
-		String where=EarthquakesContentProvider.COL_PLACE+" LIKE '%"+mQuery.trim()+"%' AND " 
+		String where=(mID.equals(""))?(EarthquakesContentProvider.COL_PLACE+" LIKE '%"+mQuery.trim()+"%' AND " 
 					+ EarthquakesContentProvider.COL_MAG+">="+miniMag
-					+ " AND "+view_past_where;
+					+ " AND "+view_past_where):(EarthquakesContentProvider.COL_ID+"="+mID);
 		String sort_by = sPref.getString(EarthquakesViewerActivity.SORT_BY_KEY, "Date");
 		String sortOrder = null;
 		if(sort_by.equals("Magnitude")) {
@@ -219,6 +189,7 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 	}
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		menu.clear();
 		inflater.inflate(R.menu.earthquake_viewer_actionbar, menu);
 		SearchManager searchManager = (SearchManager)getActivity().getSystemService(Context.SEARCH_SERVICE);
 		SearchView searchView = (SearchView)menu.findItem(R.id.action_search).getActionView();
@@ -238,6 +209,11 @@ public class EarthquakesResultFragment extends ListFragment implements LoaderCal
 		case R.id.action_search: {
 			return true;
 		}
+		case (android.R.id.home):
+			Intent intent = new Intent(getActivity(), EarthquakesViewerActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return true;
 	}
 	return false;
 		

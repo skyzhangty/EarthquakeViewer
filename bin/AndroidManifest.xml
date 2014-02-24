@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.raymond.raymondearthquakesviewer"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -52,14 +52,28 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity
-            android:name="com.raymond.raymondearthquakesviewer.MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
+        
+		<activity
+            android:name="com.raymond.raymondearthquakesviewer.EarthquakesResultActivity"
+            android:label="@string/title_activity_earthquakes_result" 
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCfkh1WCucd9ZmxERuuknWFjeYjMU7GQjg" />
+            android:value="AIzaSyA5VZn0TlJVjbkHQPFVUJIqG0TlOj4bML8"/>
+            
+            <!--"AIzaSyCfkh1WCucd9ZmxERuuknWFjeYjMU7GQjg"   -->
 
         <activity
             android:name="com.raymond.raymondearthquakesviewer.SettingsActivity"
@@ -77,13 +91,13 @@
             android:exported="false" >
         </service>
 
-        <receiver
-            android:name="com.raymond.raymondearthquakesviewer.EarthquakeUpdateReceiver"
-        >
+        <receiver android:name="com.raymond.raymondearthquakesviewer.EarthquakeUpdateReceiver" >
             <intent-filter>
-                <action android:name="BROADCAST_ALARM"/>
+                <action android:name="BROADCAST_ALARM" />
             </intent-filter>
         </receiver>
+
+        
     </application>
 
 </manifest>

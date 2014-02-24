@@ -7,15 +7,15 @@
 
     <!-- TODO: Update blank fragment layout -->
       
-	<TextView 
-	    android:id="@+id/result"
+	
+	<TextView android:id="@android:id/empty"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:background="#C0C0C0"
-	    android:textSize="20sp"
-	    android:text="@string/results"
-	/>
-	
+	    android:text="@string/no_earthquake_found"
+	    android:textSize="25sp">
+	    
+	    
+	</TextView>
    	<ListView android:id="@android:id/list"
       		android:layout_width="match_parent"
       		android:layout_height="wrap_content"      

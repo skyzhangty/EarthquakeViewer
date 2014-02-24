@@ -3,7 +3,6 @@ package com.raymond.raymondearthquakesviewer;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,7 +50,6 @@ public class EarthquakeRefreshableList extends LinearLayout implements OnTouchLi
 	public EarthquakeRefreshableList(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mHeader = LayoutInflater.from(context).inflate(R.layout.listview_header_layout, null, true);
-		Log.v("FUCK",mHeader.getHeight()+"here");
 		mProgressBar = (ProgressBar)mHeader.findViewById(R.id.pulltorefresh_progressbar);
 		mDescription = (TextView)mHeader.findViewById(R.id.description_text);
 		mArrow = (ImageView)mHeader.findViewById(R.id.arrow_image);
@@ -266,14 +264,10 @@ public class EarthquakeRefreshableList extends LinearLayout implements OnTouchLi
 			int topMargin = mHeaderLayoutParams.topMargin;
 			while(true) {
 				topMargin += SCROLL_SPEED;
-				Log.v("FuCK",topMargin+" 1");
-				
 				if(topMargin<=mHideHeaderHeight) {
 					topMargin=mHideHeaderHeight;
-					Log.v("FuCK",topMargin+" 3");
 					break;
 				}
-				Log.v("FuCK",topMargin+" 2");
 				publishProgress(topMargin);
 				sleep(10);
 			}
